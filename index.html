@@ -76,7 +76,7 @@
             <!-- Brand Logo -->
             <a href="#" class="flex items-center space-x-2 group">
                 <span class="text-2xl md:text-3xl font-serif font-bold tracking-wide text-brand-accent group-hover:text-brand-pink transition-colors">
-                    nargles_by_k
+                    Nargles By K
                 </span>
                 <span class="text-xl animate-bounce">🌸</span>
             </a>
@@ -91,7 +91,7 @@
 
             <!-- Actions (Instagram Link, Cart Icon) -->
             <div class="flex items-center space-x-4">
-                <a href="https://www.instagram.com/nargles_by_k" target="_blank" class="p-2 text-brand-charcoal hover:text-brand-accent transition-colors" title="Follow us on Instagram">
+                <a href="https://www.instagram.com/Nargles By K" target="_blank" class="p-2 text-brand-charcoal hover:text-brand-accent transition-colors" title="Follow us on Instagram">
                     <i class="fab fa-instagram text-2xl"></i>
                 </a>
                 
@@ -126,7 +126,7 @@
                     <a href="#shop" class="px-8 py-4 bg-brand-accent text-white font-bold rounded-xl shadow-lg hover:bg-brand-accent/90 transform hover:-translate-y-1 transition-all text-center">
                         Explore Collection <i class="fa-solid fa-arrow-right ml-2"></i>
                     </a>
-                    <a href="https://www.instagram.com/nargles_by_k" target="_blank" class="px-8 py-4 bg-white border-2 border-brand-pink text-brand-accent font-bold rounded-xl hover:bg-brand-lightpink transform hover:-translate-y-1 transition-all text-center">
+                    <a href="https://www.instagram.com/Nargles By K" target="_blank" class="px-8 py-4 bg-white border-2 border-brand-pink text-brand-accent font-bold rounded-xl hover:bg-brand-lightpink transform hover:-translate-y-1 transition-all text-center">
                         DM to Order <i class="fab fa-instagram ml-2 text-lg"></i>
                     </a>
                 </div>
@@ -139,7 +139,7 @@
                     <!-- Overlays & Captions matching Instagram vibe -->
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
                         <p class="font-serif text-lg italic">"Because some flowers are meant to last forever..."</p>
-                        <p class="text-xs text-gray-300 mt-1">@nargles_by_k handmade treasures</p>
+                        <p class="text-xs text-gray-300 mt-1">@Nargles By K handmade treasures</p>
                     </div>
                 </div>
                 <!-- Sparkle Badge -->
@@ -233,7 +233,7 @@
                         <i class="fa-solid fa-chevron-down text-brand-accent transition-transform" :class="activeFaq === 1 ? 'rotate-180' : ''"></i>
                     </button>
                     <div x-show="activeFaq === 1" x-collapse class="px-6 pb-4 text-gray-600 text-sm leading-relaxed">
-                        To request highly personalized details (like custom initials, cards, or specific color schemes), simply hit the <a href="https://www.instagram.com/nargles_by_k" target="_blank" class="text-brand-accent underline font-semibold">"DM to Order" link</a> on Instagram with your Order ID, and we'll craft it exactly how you dream it!
+                        To request highly personalized details (like custom initials, cards, or specific color schemes), simply hit the <a href="https://www.instagram.com/Nargles By K" target="_blank" class="text-brand-accent underline font-semibold">"DM to Order" link</a> on Instagram with your Order ID, and we'll craft it exactly how you dream it!
                     </div>
                 </div>
 
@@ -266,14 +266,14 @@
     <footer class="bg-brand-charcoal text-white py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
             <div>
-                <p class="font-serif text-2xl font-bold tracking-wide text-brand-pink">nargles_by_k</p>
+                <p class="font-serif text-2xl font-bold tracking-wide text-brand-pink">Nargles By K</p>
                 <p class="text-xs text-gray-400 mt-1">Handmade Flowers & Everlasting Smiles</p>
             </div>
             <div class="flex space-x-6 text-sm text-gray-300">
                 <a href="#hero" class="hover:text-white transition-colors">Home</a>
                 <a href="#shop" class="hover:text-white transition-colors">Shop</a>
                 <a href="#faq" class="hover:text-white transition-colors">Support</a>
-                <a href="https://www.instagram.com/nargles_by_k" target="_blank" class="hover:text-white transition-colors">Instagram</a>
+                <a href="https://www.instagram.com/Nargles By K" target="_blank" class="hover:text-white transition-colors">Instagram</a>
             </div>
             <div class="text-xs text-gray-500">
                 &copy; <span x-text="new Date().getFullYear()"></span> Nargles by K. All rights reserved.
@@ -428,13 +428,13 @@
                 simulateCheckout() {
                     if (this.cart.length === 0) return alert("Basket is empty!");
                     
-                    let message = "Hi @nargles_by_k! I'd love to order: \n\n" + 
+                    let message = "Hi @Nargles By K! I'd love to order: \n\n" + 
                         this.cart.map(i => `- ₹{i.name} (x₹{i.qty})`).join("\n") + 
                         `\n\nTotal: ₹₹{this.getCartTotal().toFixed(2)}\n\nCan we customize this? ✨`;
                     
                     let encoded = encodeURIComponent(message);
-                    alert("Sweet! Redirecting you to @nargles_by_k Instagram DM to finalize details and secure customized colors!");
-                    window.open(`https://www.instagram.com/nargles_by_k`, '_blank');
+                    alert("Sweet! Redirecting you to @Nargles By K Instagram DM to finalize details and secure customized colors!");
+                    window.open(`https://www.instagram.com/Nargles By K`, '_blank');
                 }
             }
         }
