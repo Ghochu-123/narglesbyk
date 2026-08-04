@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nargles by K | Handmade Everlasting Bouquets</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js for interactive state -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            pink: '#FFB7C5',
+                            lightpink: '#FFF0F2',
+                            yellow: '#FFD166',
+                            purple: '#E8DBFC',
+                            charcoal: '#2D2D2D',
+                            accent: '#F28482'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['Quicksand', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        [x-cloak] { display: none !important; }
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #FFFDF9;
+        }
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Custom floating animations */
+        @keyframes float-slow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(3deg); }
+        }
+        @keyframes float-delay {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(-3deg); }
+        }
+        .animate-float1 {
+            animation: float-slow 6s ease-in-out infinite;
+        }
+        .animate-float2 {
+            animation: float-delay 8s ease-in-out infinite;
+        }
+        /* Sparkle trace */
+        .sparkle-hover:hover {
+            box-shadow: 0 0 20px rgba(255, 183, 197, 0.6);
+            transform: translateY(-4px);
+        }
+    </style>
+</head>
+<body class="text-brand-charcoal overflow-x-hidden selection:bg-brand-pink selection:text-white" x-data="store()">
+
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-brand-pink/20 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center space-x-2 group">
+                <span class="text-2xl md:text-3xl font-serif font-bold tracking-wide text-brand-accent group-hover:text-brand-pink transition-colors">
+                    nargles_by_k
+                </span>
+                <span class="text-xl animate-bounce">🌸</span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold tracking-wider uppercase">
+                <a href="#hero" class="hover:text-brand-accent transition-colors">Home</a>
+                <a href="#shop" class="hover:text-brand-accent transition-colors">Shop Bouquets</a>
+                <a href="#about" class="hover:text-brand-accent transition-colors">Our Aesthetic</a>
+                <a href="#faq" class="hover:text-brand-accent transition-colors">FAQ & Support</a>
+            </nav>
+
+            <!-- Actions (Instagram Link, Cart Icon) -->
+            <div class="flex items-center space-x-4">
+                <a href="https://www.instagram.com/nargles_by_k" target="_blank" class="p-2 text-brand-charcoal hover:text-brand-accent transition-colors" title="Follow us on Instagram">
+                    <i class="fab fa-instagram text-2xl"></i>
+                </a>
+                
+                <!-- Cart Trigger Button -->
+                <button @click="cartOpen = true" class="relative p-2 bg-brand-lightpink rounded-full hover:bg-brand-pink/30 transition-all duration-300 group">
+                    <i class="fa-solid fa-bag-shopping text-xl text-brand-accent group-hover:scale-110 transition-transform"></i>
+                    <span x-show="totalItems() > 0" x-text="totalItems()" x-transition class="absolute -top-1 -right-1 bg-brand-accent text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center animate-pulse"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner with Interactive/Sparkling aesthetic -->
+    <section id="hero" class="relative py-12 md:py-24 bg-gradient-to-b from-brand-lightpink to-white overflow-hidden">
+        <!-- Floating shapes for visual aesthetic -->
+        <div class="absolute top-10 left-10 w-16 h-16 bg-brand-pink/20 rounded-full blur-xl animate-float1"></div>
+        <div class="absolute bottom-12 right-20 w-24 h-24 bg-brand-yellow/20 rounded-full blur-xl animate-float2"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left z-10">
+                <span class="inline-block bg-brand-pink/30 text-brand-accent text-xs uppercase tracking-widest font-bold px-3 py-1.5 rounded-full">
+                    💐 Crafted Everlasting Artistry
+                </span>
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-serif font-black leading-tight">
+                    Handmade with <span class="underline decoration-brand-pink/60">love</span>, <br>
+                    wrapped with <span class="text-brand-accent italic font-normal">emotions</span> 🌸✨
+                </h1>
+                <p class="text-lg text-gray-600 max-w-xl mx-auto lg:mx-0">
+                    After a little creative pause, we're back with fresh blooms, adorable customized bouquets, and infinitely beautiful gifting ideas that never fade.
+                </p>
+                <div class="pt-4 flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+                    <a href="#shop" class="px-8 py-4 bg-brand-accent text-white font-bold rounded-xl shadow-lg hover:bg-brand-accent/90 transform hover:-translate-y-1 transition-all text-center">
+                        Explore Collection <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </a>
+                    <a href="https://www.instagram.com/nargles_by_k" target="_blank" class="px-8 py-4 bg-white border-2 border-brand-pink text-brand-accent font-bold rounded-xl hover:bg-brand-lightpink transform hover:-translate-y-1 transition-all text-center">
+                        DM to Order <i class="fab fa-instagram ml-2 text-lg"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Beautiful Collage Mockup / Hero Image -->
+            <div class="lg:col-span-5 relative flex justify-center">
+                <div class="relative w-80 h-96 sm:w-96 sm:h-[28rem] rounded-2xl overflow-hidden shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-500 border-4 border-white">
+                    <img src="https://images.unsplash.com/photo-1596436889106-be35e843f974?auto=format&fit=crop&q=80&w=600" alt="Beautiful Flowers" class="w-full h-full object-cover">
+                    <!-- Overlays & Captions matching Instagram vibe -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
+                        <p class="font-serif text-lg italic">"Because some flowers are meant to last forever..."</p>
+                        <p class="text-xs text-gray-300 mt-1">@nargles_by_k handmade treasures</p>
+                    </div>
+                </div>
+                <!-- Sparkle Badge -->
+                <div class="absolute -top-6 -right-4 bg-brand-yellow text-brand-charcoal text-xs font-bold py-3 px-4 rounded-full shadow-lg transform -rotate-12 animate-float1 border-2 border-white">
+                    ✨ 100% Handcrafted!
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop/Products Section -->
+    <section id="shop" class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-serif font-bold">Our Freshly Crafted Blooms</h2>
+                <div class="w-24 h-1 bg-brand-pink mx-auto mt-4 mb-4 rounded-full"></div>
+                <p class="text-gray-500">Each bouquet is carefully woven, wrapped, and dispatched to bring cozy vibes to you and your favorite humans.</p>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <template x-for="product in products" :key="product.id">
+                    <div class="bg-white rounded-2xl overflow-hidden border border-brand-pink/20 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col sparkle-hover group">
+                        <div class="relative overflow-hidden aspect-square bg-brand-lightpink">
+                            <img :src="product.image" :alt="product.name" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <!-- Category badge -->
+                            <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-brand-accent text-xs font-bold px-2.5 py-1 rounded-full" x-text="product.category"></span>
+                        </div>
+                        
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-serif text-xl font-bold text-gray-900 mb-2" x-text="product.name"></h3>
+                                <p class="text-sm text-gray-500 line-clamp-2 mb-4" x-text="product.description"></p>
+                            </div>
+
+                            <div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="text-2xl font-bold text-brand-accent" x-text="'$' + product.price.toFixed(2)"></span>
+                                    <span class="text-xs text-brand-pink font-semibold bg-brand-lightpink px-2 py-1 rounded">Pre-order / Custom</span>
+                                </div>
+                                <button @click="addToCart(product)" class="w-full py-3 bg-brand-charcoal text-white rounded-xl font-bold hover:bg-brand-accent hover:text-white transition-all duration-300 flex items-center justify-center space-x-2">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                    <span>Add to Cart</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Aesthetic / Core Concept Banner -->
+    <section id="about" class="py-16 bg-brand-lightpink">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+            <span class="text-2xl">🧸 ✨ 🎀</span>
+            <h2 class="text-3xl font-serif font-extrabold mt-4 mb-6">"May he buy you flowers, or even better, everlasting ones!"</h2>
+            <p class="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
+                No watering, no wilting! At <strong>Nargles by K</strong>, we make gorgeous, customized bouquets made of premium materials (pipe cleaners, high-quality yarns, and customized memories). Perfect for birthdays, anniversaries, or just to say "I'm thinking of you." Let's romanticize daily life!
+            </p>
+            <div class="mt-8 flex justify-center space-x-6">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-2 text-brand-accent text-xl shadow-sm"><i class="fa-solid fa-heart"></i></div>
+                    <span class="text-sm font-bold">100% Handmade</span>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-2 text-brand-accent text-xl shadow-sm"><i class="fa-solid fa-gift"></i></div>
+                    <span class="text-sm font-bold">Custom Packaging</span>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-2 text-brand-accent text-xl shadow-sm"><i class="fa-solid fa-truck-fast"></i></div>
+                    <span class="text-sm font-bold">Pan-India Delivery</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Help & FAQ Section -->
+    <section id="faq" class="py-16 md:py-24 bg-white" x-data="{ activeFaq: null }">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-serif font-bold">Help & FAQ</h2>
+                <p class="text-gray-500 mt-2">Everything you need to know about customizing your dream blooms</p>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ 1 -->
+                <div class="border border-brand-pink/20 rounded-xl overflow-hidden bg-brand-lightpink/30">
+                    <button @click="activeFaq = (activeFaq === 1 ? null : 1)" class="w-full px-6 py-4 text-left font-bold flex justify-between items-center hover:bg-brand-lightpink/50 transition-colors">
+                        <span>How do I order customized colors or letters?</span>
+                        <i class="fa-solid fa-chevron-down text-brand-accent transition-transform" :class="activeFaq === 1 ? 'rotate-180' : ''"></i>
+                    </button>
+                    <div x-show="activeFaq === 1" x-collapse class="px-6 pb-4 text-gray-600 text-sm leading-relaxed">
+                        To request highly personalized details (like custom initials, cards, or specific color schemes), simply hit the <a href="https://www.instagram.com/nargles_by_k" target="_blank" class="text-brand-accent underline font-semibold">"DM to Order" link</a> on Instagram with your Order ID, and we'll craft it exactly how you dream it!
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="border border-brand-pink/20 rounded-xl overflow-hidden bg-brand-lightpink/30">
+                    <button @click="activeFaq = (activeFaq === 2 ? null : 2)" class="w-full px-6 py-4 text-left font-bold flex justify-between items-center hover:bg-brand-lightpink/50 transition-colors">
+                        <span>What materials do you use?</span>
+                        <i class="fa-solid fa-chevron-down text-brand-accent transition-transform" :class="activeFaq === 2 ? 'rotate-180' : ''"></i>
+                    </button>
+                    <div x-show="activeFaq === 2" x-collapse class="px-6 pb-4 text-gray-600 text-sm leading-relaxed">
+                        We primarily craft our flowers using premium tactile pipe-cleaners, crochet wool yarns, felt, and lovely hand-selected tissue wrapping papers. They're soft, durable, and highly vibrant.
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="border border-brand-pink/20 rounded-xl overflow-hidden bg-brand-lightpink/30">
+                    <button @click="activeFaq = (activeFaq === 3 ? null : 3)" class="w-full px-6 py-4 text-left font-bold flex justify-between items-center hover:bg-brand-lightpink/50 transition-colors">
+                        <span>How long does delivery take?</span>
+                        <i class="fa-solid fa-chevron-down text-brand-accent transition-transform" :class="activeFaq === 3 ? 'rotate-180' : ''"></i>
+                    </button>
+                    <div x-show="activeFaq === 3" x-collapse class="px-6 pb-4 text-gray-600 text-sm leading-relaxed">
+                        Because each piece is individually hand-crafted with intricate attention, please allow 3-5 days for creation and 4-7 business days for shipping. Please book well in advance for special occasions!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-charcoal text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+            <div>
+                <p class="font-serif text-2xl font-bold tracking-wide text-brand-pink">nargles_by_k</p>
+                <p class="text-xs text-gray-400 mt-1">Handmade Flowers & Everlasting Smiles</p>
+            </div>
+            <div class="flex space-x-6 text-sm text-gray-300">
+                <a href="#hero" class="hover:text-white transition-colors">Home</a>
+                <a href="#shop" class="hover:text-white transition-colors">Shop</a>
+                <a href="#faq" class="hover:text-white transition-colors">Support</a>
+                <a href="https://www.instagram.com/nargles_by_k" target="_blank" class="hover:text-white transition-colors">Instagram</a>
+            </div>
+            <div class="text-xs text-gray-500">
+                &copy; <span x-text="new Date().getFullYear()"></span> Nargles by K. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- CART SIDE DRAWER (Interactive) -->
+    <div x-show="cartOpen" class="fixed inset-0 z-50 overflow-hidden" x-cloak>
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity" @click="cartOpen = false"></div>
+        
+        <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col">
+                <!-- Cart Header -->
+                <div class="px-6 py-6 bg-brand-lightpink border-b border-brand-pink/20 flex items-center justify-between">
+                    <h2 class="text-xl font-serif font-bold text-brand-charcoal">Your Flower Basket 🌸</h2>
+                    <button @click="cartOpen = false" class="text-gray-500 hover:text-brand-accent p-1">
+                        <i class="fa-solid fa-xmark text-2xl"></i>
+                    </button>
+                </div>
+
+                <!-- Cart Items List -->
+                <div class="flex-1 overflow-y-auto p-6 space-y-6">
+                    <template x-show="cart.length === 0">
+                        <div class="text-center py-12 space-y-4">
+                            <span class="text-5xl">🛒</span>
+                            <p class="text-gray-500 font-medium">Your basket is empty. Let's add some blooms!</p>
+                            <button @click="cartOpen = false" class="px-6 py-2.5 bg-brand-accent text-white text-sm font-bold rounded-xl">Continue Shopping</button>
+                        </div>
+                    </template>
+
+                    <template x-for="item in cart" :key="item.id">
+                        <div class="flex items-center space-x-4 border-b border-gray-100 pb-4">
+                            <img :src="item.image" :alt="item.name" class="w-20 h-20 object-cover rounded-xl bg-brand-lightpink">
+                            <div class="flex-1">
+                                <h4 class="font-bold text-gray-900 text-sm md:text-base" x-text="item.name"></h4>
+                                <span class="text-brand-accent font-bold text-sm" x-text="'$' + item.price.toFixed(2)"></span>
+                                <div class="flex items-center space-x-2 mt-2">
+                                    <button @click="updateQty(item, -1)" class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-xs font-bold hover:bg-brand-pink/30">-</button>
+                                    <span class="text-sm font-bold" x-text="item.qty"></span>
+                                    <button @click="updateQty(item, 1)" class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-xs font-bold hover:bg-brand-pink/30">+</button>
+                                </div>
+                            </div>
+                            <button @click="removeFromCart(item)" class="text-gray-400 hover:text-brand-accent">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- Cart Footer & Checkout Simulation -->
+                <div class="border-t border-gray-200 p-6 bg-brand-lightpink/10 space-y-4">
+                    <div class="flex justify-between text-base font-bold text-gray-900">
+                        <span>Subtotal</span>
+                        <span x-text="'$' + getCartTotal().toFixed(2)"></span>
+                    </div>
+                    <p class="text-xs text-gray-500">Shipping, customization, and taxes calculated at checkout.</p>
+                    <div class="space-y-2">
+                        <button @click="simulateCheckout()" class="w-full py-4 bg-brand-accent text-white font-bold rounded-xl shadow-lg hover:bg-brand-accent/90 transition-all flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-lock text-sm"></i>
+                            <span>Secure Checkout (DM simulation)</span>
+                        </button>
+                        <button @click="cartOpen = false" class="w-full py-3 bg-white border border-gray-300 text-gray-600 text-xs font-semibold rounded-xl hover:bg-gray-50 transition-all">
+                            Continue Browsing
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alpine.js Store Script -->
+    <script>
+        function store() {
+            return {
+                cartOpen: false,
+                cart: [],
+                products: [
+                    {
+                        id: 1,
+                        name: "Sunlight Smiles Sunflower Bouquet",
+                        category: "Best Seller",
+                        description: "Gorgeous handmade pipe cleaner sunflower bouquet with fluffy custom wrapper. Brings immediate happiness!",
+                        price: 18.99,
+                        image: "https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&q=80&w=600"
+                    },
+                    {
+                        id: 2,
+                        name: "Blushing Lily & Daisy Bouquet",
+                        category: "Classic Gift",
+                        description: "Delicately sculpted lilies paired with blue/white crochet daisies for a classy touch.",
+                        price: 24.50,
+                        image: "https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&q=80&w=600"
+                    },
+                    {
+                        id: 3,
+                        name: "Satin Red Everlasting Roses",
+                        category: "Romantic",
+                        description: "A gorgeous cluster of rich crimson ribbon roses, delicately wrapped with elegant bows.",
+                        price: 15.99,
+                        image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=600"
+                    },
+                    {
+                        id: 4,
+                        name: "Custom Memory & Polaroids Sunflower",
+                        category: "Customized",
+                        description: "Warm pipe-cleaner sunflowers decorated with hanging personal printed photos / polaroids.",
+                        price: 28.00,
+                        image: "https://images.unsplash.com/photo-1494972308805-463bc619d34e?auto=format&fit=crop&q=80&w=600"
+                    },
+                    {
+                        id: 5,
+                        name: "Dreamy Blue Daisy Meadow",
+                        category: "Pastel Dreams",
+                        description: "Splendid mixture of soft blue and marshmallow white daisy pipe-cleaner florals in premium wrap.",
+                        price: 19.99,
+                        image: "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&q=80&w=600"
+                    },
+                    {
+                        id: 6,
+                        name: "Cozy Crochet Tulip Single Bloom",
+                        category: "Cute & Tiny",
+                        description: "Single stem delicate handcrafted tulip. The ultimate pocket-friendly aesthetic souvenir.",
+                        price: 8.50,
+                        image: "https://images.unsplash.com/photo-1520763185298-1b434c919102?auto=format&fit=crop&q=80&w=600"
+                    }
+                ],
+                addToCart(product) {
+                    let existing = this.cart.find(item => item.id === product.id);
+                    if (existing) {
+                        existing.qty++;
+                    } else {
+                        this.cart.push({ ...product, qty: 1 });
+                    }
+                    this.cartOpen = true;
+                },
+                updateQty(item, amount) {
+                    item.qty += amount;
+                    if (item.qty <= 0) {
+                        this.removeFromCart(item);
+                    }
+                },
+                removeFromCart(item) {
+                    this.cart = this.cart.filter(i => i.id !== item.id);
+                },
+                totalItems() {
+                    return this.cart.reduce((sum, item) => sum + item.qty, 0);
+                },
+                getCartTotal() {
+                    return this.cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+                },
+                simulateCheckout() {
+                    if (this.cart.length === 0) return alert("Basket is empty!");
+                    
+                    let message = "Hi @nargles_by_k! I'd love to order: \n\n" + 
+                        this.cart.map(i => `- ${i.name} (x${i.qty})`).join("\n") + 
+                        `\n\nTotal: $${this.getCartTotal().toFixed(2)}\n\nCan we customize this? ✨`;
+                    
+                    let encoded = encodeURIComponent(message);
+                    alert("Sweet! Redirecting you to @nargles_by_k Instagram DM to finalize details and secure customized colors!");
+                    window.open(`https://www.instagram.com/nargles_by_k`, '_blank');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
