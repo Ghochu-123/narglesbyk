@@ -177,7 +177,7 @@
 
                             <div>
                                 <div class="flex items-center justify-between mb-4">
-                                    <span class="text-2xl font-bold text-brand-accent" x-text="'$' + product.price.toFixed(2)"></span>
+                                    <span class="text-2xl font-bold text-brand-accent" x-text="'₹' + product.price.toFixed(2)"></span>
                                     <span class="text-xs text-brand-pink font-semibold bg-brand-lightpink px-2 py-1 rounded">Pre-order / Custom</span>
                                 </div>
                                 <button @click="addToCart(product)" class="w-full py-3 bg-brand-charcoal text-white rounded-xl font-bold hover:bg-brand-accent hover:text-white transition-all duration-300 flex items-center justify-center space-x-2">
@@ -310,7 +310,7 @@
                             <img :src="item.image" :alt="item.name" class="w-20 h-20 object-cover rounded-xl bg-brand-lightpink">
                             <div class="flex-1">
                                 <h4 class="font-bold text-gray-900 text-sm md:text-base" x-text="item.name"></h4>
-                                <span class="text-brand-accent font-bold text-sm" x-text="'$' + item.price.toFixed(2)"></span>
+                                <span class="text-brand-accent font-bold text-sm" x-text="'₹' + item.price.toFixed(2)"></span>
                                 <div class="flex items-center space-x-2 mt-2">
                                     <button @click="updateQty(item, -1)" class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-xs font-bold hover:bg-brand-pink/30">-</button>
                                     <span class="text-sm font-bold" x-text="item.qty"></span>
@@ -328,7 +328,7 @@
                 <div class="border-t border-gray-200 p-6 bg-brand-lightpink/10 space-y-4">
                     <div class="flex justify-between text-base font-bold text-gray-900">
                         <span>Subtotal</span>
-                        <span x-text="'$' + getCartTotal().toFixed(2)"></span>
+                        <span x-text="'₹' + getCartTotal().toFixed(2)"></span>
                     </div>
                     <p class="text-xs text-gray-500">Shipping, customization, and taxes calculated at checkout.</p>
                     <div class="space-y-2">
@@ -429,8 +429,8 @@
                     if (this.cart.length === 0) return alert("Basket is empty!");
                     
                     let message = "Hi @nargles_by_k! I'd love to order: \n\n" + 
-                        this.cart.map(i => `- ${i.name} (x${i.qty})`).join("\n") + 
-                        `\n\nTotal: $${this.getCartTotal().toFixed(2)}\n\nCan we customize this? ✨`;
+                        this.cart.map(i => `- ₹{i.name} (x₹{i.qty})`).join("\n") + 
+                        `\n\nTotal: ₹₹{this.getCartTotal().toFixed(2)}\n\nCan we customize this? ✨`;
                     
                     let encoded = encodeURIComponent(message);
                     alert("Sweet! Redirecting you to @nargles_by_k Instagram DM to finalize details and secure customized colors!");
